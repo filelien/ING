@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Globe2, Cpu, Zap, Building2, TrendingUp, Cog, ArrowUpRight, Sparkles } from 'lucide-react';
 import InovTechLogo from '../../logo/INOV_TECHNOLOGY_250x250-C4SJNkeH.png';
+import InovEnergyLogo from '../../logo/images.png';
 import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const entities = [
@@ -18,9 +19,10 @@ const entities = [
   {
     title: 'INOV ENERGY',
     subtitle: 'Solutions Énergétiques Durables',
-    url: 'https://energy.inovafrik.com',
+    url: 'https://inovenergy.netlify.app/',
     gradient: 'from-emerald-500/25 via-green-500/20 to-teal-500/15',
     icon: Zap,
+    logo: InovEnergyLogo,
     image:
       'https://images.unsplash.com/photo-1509395176047-4a66953fd231?auto=format&fit=crop&w=1200&q=80',
     metric: 'Micro-réseaux, solaire, monitoring 24/7',
@@ -179,9 +181,13 @@ const Entities = () => {
               <div className="relative z-10 flex items-start gap-4 sm:gap-5 h-full">
                 <motion.div
                   whileHover={{ rotate: 10, scale: 1.08 }}
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center overflow-hidden"
                 >
-                  <entity.icon className={mode === 'clear' ? 'text-emerald-700' : 'text-white'} size={22} />
+                  {entity.logo ? (
+                    <img src={entity.logo} alt={entity.title} className="w-full h-full object-contain" />
+                  ) : (
+                    <entity.icon className={mode === 'clear' ? 'text-emerald-700' : 'text-white'} size={22} />
+                  )}
                 </motion.div>
 
                 <div className="flex-1">
