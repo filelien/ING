@@ -8,7 +8,7 @@ import { languageOptions } from '../i18n/translations';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const { language, t } = useLanguage();
+  const { language, setLanguage, t } = useLanguage();
   const { mode } = useThemeMode();
   const currentLanguageLabel = languageOptions.find((option) => option.code === language)?.label ?? 'Français';
 
@@ -26,7 +26,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-slate-950 border-t border-slate-900">
+    <footer className={`${mode === 'clear' ? 'bg-slate-100 border-t border-slate-300' : 'bg-slate-950 border-t border-slate-900'}`}>
       <div className="container mx-auto px-6 py-16 flex flex-col items-center text-center gap-12">
         <div className="flex flex-col items-center gap-5">
           <div className="relative">
@@ -49,17 +49,36 @@ const Footer = () => {
           <h3 className="text-2xl font-bold text-white">
             <span className="text-emerald-400">INOV</span> AFRIK
           </h3>
-          <p className="text-gray-400 max-w-2xl leading-relaxed">
+          <p className={`${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'} max-w-2xl leading-relaxed`}>
             INOV AFRIK conçoit, sécurise et réalise des projets technologiques, énergétiques et industriels adaptés aux réalités du terrain africain.
           </p>
-          <p className="text-gray-500 text-sm max-w-2xl leading-relaxed">
+          <p className={`${mode === 'clear' ? 'text-slate-500' : 'text-gray-500'} text-sm max-w-2xl leading-relaxed`}>
             Des références concrètes, une équipe certifiée (Oracle, AWS, Azure, ISO 27001, CISSP, CKA) et une gouvernance transparente (RCCM: TG-LFW-01-2023-A10-02858).
           </p>
-          <div className="flex flex-wrap justify-center gap-3 text-[11px] uppercase tracking-[0.18em] text-emerald-300">
-            <span className="px-3 py-1 border border-emerald-500/50 rounded-full">Togo · Afrique de l'Ouest</span>
-            <span className="px-3 py-1 border border-emerald-500/50 rounded-full">Présence 180+ pays</span>
-            <span className="px-3 py-1 border border-emerald-500/50 rounded-full">Français</span>
-            <span className="px-3 py-1 border border-emerald-500/50 rounded-full">Mode sombre</span>
+          <div className="w-full max-w-xl">
+            <label className={`block text-xs mb-2 ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>{t('header.language')}</label>
+            <select
+              value={language}
+              onChange={(e) => setLanguage(e.target.value as typeof language)}
+              className={`w-full text-sm md:text-base rounded-xl px-4 py-3 border transition-colors ${
+                mode === 'clear'
+                  ? 'bg-white border-slate-300 text-slate-700'
+                  : 'bg-slate-900 border-slate-700 text-gray-200'
+              }`}
+              aria-label={t('header.language')}
+            >
+              {languageOptions.map((option) => (
+                <option key={option.code} value={option.code}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={`flex flex-wrap justify-center gap-3 text-[11px] uppercase tracking-[0.18em] ${mode === 'clear' ? 'text-emerald-700' : 'text-emerald-300'}`}>
+            <span className={`px-3 py-1 border rounded-full ${mode === 'clear' ? 'border-emerald-500/40 bg-white/70' : 'border-emerald-500/50'}`}>Togo · Afrique de l'Ouest</span>
+            <span className={`px-3 py-1 border rounded-full ${mode === 'clear' ? 'border-emerald-500/40 bg-white/70' : 'border-emerald-500/50'}`}>Présence 180+ pays</span>
+            <span className={`px-3 py-1 border rounded-full ${mode === 'clear' ? 'border-emerald-500/40 bg-white/70' : 'border-emerald-500/50'}`}>{currentLanguageLabel}</span>
+            <span className={`px-3 py-1 border rounded-full ${mode === 'clear' ? 'border-emerald-500/40 bg-white/70' : 'border-emerald-500/50'}`}>{mode === 'night' ? t('mode.night') : t('mode.clear')}</span>
           </div>
           <div className="flex gap-4 mt-2">
             {socialLinks.map((social, index) => (
@@ -68,7 +87,11 @@ const Footer = () => {
                 href={social.href}
                 whileHover={{ scale: 1.1, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-10 h-10 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50 transition-all duration-300"
+                className={`w-10 h-10 border rounded-lg flex items-center justify-center transition-all duration-300 ${
+                  mode === 'clear'
+                    ? 'bg-white border-slate-300 text-slate-500 hover:text-emerald-600 hover:border-emerald-500/50'
+                    : 'bg-slate-900 border-slate-800 text-gray-400 hover:text-emerald-400 hover:border-emerald-500/50'
+                }`}
                 aria-label={social.label}
               >
                 <social.icon size={20} />
@@ -85,13 +108,13 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">{t('footer.group')}</h4>
+            <h4 className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-semibold mb-4`}>{t('footer.group')}</h4>
             <ul className="space-y-2">
               {footerLinks.Entreprise.map((link, linkIndex) => (
                 <li key={linkIndex}>
                   <Link
                     to={link === 'Contact' ? '/contact' : '/groupe'}
-                    className="text-gray-400 hover:text-emerald-400 transition-colors duration-300 text-sm"
+                    className={`${mode === 'clear' ? 'text-slate-600 hover:text-emerald-600' : 'text-gray-400 hover:text-emerald-400'} transition-colors duration-300 text-sm`}
                   >
                     {link}
                   </Link>
@@ -107,13 +130,13 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">{t('footer.services')}</h4>
+            <h4 className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-semibold mb-4`}>{t('footer.services')}</h4>
             <ul className="space-y-2">
               {footerLinks.Services.map((link, linkIndex) => (
                 <li key={linkIndex}>
                   <Link
                     to={link === 'Conseil' ? '/contact' : '/poles'}
-                    className="text-gray-400 hover:text-emerald-400 transition-colors duration-300 text-sm"
+                    className={`${mode === 'clear' ? 'text-slate-600 hover:text-emerald-600' : 'text-gray-400 hover:text-emerald-400'} transition-colors duration-300 text-sm`}
                   >
                     {link}
                   </Link>
@@ -129,13 +152,13 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">{t('footer.institutional')}</h4>
+            <h4 className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-semibold mb-4`}>{t('footer.institutional')}</h4>
             <ul className="space-y-2">
               {footerLinks.Institutionnel.map((link, linkIndex) => (
                 <li key={linkIndex}>
                   <Link
                     to="/institutionnel"
-                    className="text-gray-400 hover:text-emerald-400 transition-colors duration-300 text-sm"
+                    className={`${mode === 'clear' ? 'text-slate-600 hover:text-emerald-600' : 'text-gray-400 hover:text-emerald-400'} transition-colors duration-300 text-sm`}
                   >
                     {link}
                   </Link>
@@ -145,15 +168,15 @@ const Footer = () => {
           </motion.div>
         </div>
 
-        <div className="border-t border-slate-900 pt-8 w-full">
+        <div className={`pt-8 w-full ${mode === 'clear' ? 'border-t border-slate-300' : 'border-t border-slate-900'}`}>
           <div className="flex flex-col items-center gap-3 text-center">
-            <p className="text-gray-500 text-sm">
+            <p className={`${mode === 'clear' ? 'text-slate-500' : 'text-gray-500'} text-sm`}>
               © {currentYear} INOV AFRIK. {t('footer.copy')}
             </p>
-            <p className="text-gray-500 text-xs">
+            <p className={`${mode === 'clear' ? 'text-slate-500' : 'text-gray-500'} text-xs`}>
               {t('footer.langLine')} : {currentLanguageLabel} · {t('footer.modeLine')} : {mode === 'night' ? t('mode.night') : t('mode.clear')} · {t('footer.networkLine')} : 180+ pays
             </p>
-            <div className="flex flex-wrap justify-center md:items-center gap-3 text-sm text-gray-500">
+            <div className={`flex flex-wrap justify-center md:items-center gap-3 text-sm ${mode === 'clear' ? 'text-slate-500' : 'text-gray-500'}`}>
               <span>RCCM: TG-LFW-01-2023-A10-02858</span>
               <span>NIF: 1001853268</span>
               <span>CNSS: 71430</span>

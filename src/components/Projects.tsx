@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const projects = [
   {
@@ -65,9 +66,19 @@ const projects = [
 ];
 
 const Projects = () => {
+  const { mode } = useThemeMode();
   return (
-    <section id="projects" className="py-24 bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 opacity-30" />
+    <section
+      id="projects"
+      className={`py-24 relative overflow-hidden ${mode === 'clear' ? 'bg-slate-50' : 'bg-slate-950'}`}
+    >
+      <div
+        className={`absolute inset-0 ${
+          mode === 'clear'
+            ? 'bg-gradient-to-b from-white via-slate-100 to-slate-200 opacity-70'
+            : 'bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 opacity-30'
+        }`}
+      />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -77,10 +88,10 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Nos <span className="text-emerald-400">Réalisations</span>
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>
+            Nos <span className={mode === 'clear' ? 'text-emerald-600' : 'text-emerald-400'}>Réalisations</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className={`text-xl max-w-3xl mx-auto ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
             Projets d'envergure dans nos cinq pôles d'expertise, avec un impact mesurable
           </p>
         </motion.div>
@@ -94,38 +105,60 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -10 }}
-              className="group relative bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl overflow-hidden hover:border-emerald-500/50 transition-all duration-300"
+              className={`group relative rounded-2xl overflow-hidden transition-all duration-300 border ${
+                mode === 'clear'
+                  ? 'bg-white border-slate-200 hover:border-emerald-400 shadow-sm'
+                  : 'bg-slate-900/50 border-slate-800 hover:border-emerald-500/50'
+              }`}
             >
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-95"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t ${
+                    mode === 'clear'
+                      ? 'from-white/25 via-white/45 to-transparent'
+                      : 'from-slate-900/70 via-slate-900/45 to-transparent'
+                  }`}
+                />
                 <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-emerald-500/90 backdrop-blur-sm text-white text-xs font-semibold rounded-full">
+                  <span
+                    className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                      mode === 'clear' ? 'bg-emerald-100 text-emerald-700' : 'bg-emerald-500/90 text-white'
+                    }`}
+                  >
                     {project.category}
                   </span>
                 </div>
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors duration-300">
+                <h3
+                  className={`text-xl font-bold mb-3 transition-colors duration-300 ${
+                    mode === 'clear'
+                      ? 'text-slate-900 group-hover:text-emerald-700'
+                      : 'text-white group-hover:text-emerald-400'
+                  }`}
+                >
                   {project.title}
                 </h3>
                 <div className="space-y-2 mb-4 text-sm leading-relaxed">
-                  <p className="text-gray-300"><span className="text-white font-medium">Contexte :</span> {project.context}</p>
-                  <p className="text-gray-300"><span className="text-white font-medium">Problématique :</span> {project.challenge}</p>
-                  <p className="text-gray-300"><span className="text-white font-medium">Solution :</span> {project.solution}</p>
-                  <p className="text-emerald-300"><span className="text-emerald-200 font-medium">Résultat :</span> {project.result}</p>
+                  <p className={`${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'}`}><span className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-medium`}>Contexte :</span> {project.context}</p>
+                  <p className={`${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'}`}><span className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-medium`}>Problématique :</span> {project.challenge}</p>
+                  <p className={`${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'}`}><span className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-medium`}>Solution :</span> {project.solution}</p>
+                  <p className={mode === 'clear' ? 'text-emerald-700' : 'text-emerald-300'}><span className={`${mode === 'clear' ? 'text-emerald-800' : 'text-emerald-200'} font-medium`}>Résultat :</span> {project.result}</p>
                 </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-2 py-1 bg-slate-800/50 text-gray-400 text-xs rounded-md"
+                      className={`px-2 py-1 text-xs rounded-md ${
+                        mode === 'clear' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-slate-800/50 text-gray-400'
+                      }`}
                     >
                       {tag}
                     </span>
@@ -134,7 +167,9 @@ const Projects = () => {
 
                 <motion.button
                   whileHover={{ x: 5 }}
-                  className="flex items-center gap-2 text-emerald-400 font-medium text-sm group-hover:gap-3 transition-all duration-300"
+                  className={`flex items-center gap-2 font-medium text-sm group-hover:gap-3 transition-all duration-300 ${
+                    mode === 'clear' ? 'text-emerald-700' : 'text-emerald-400'
+                  }`}
                 >
                   <span>Voir détails</span>
                   <ExternalLink size={16} />

@@ -1,16 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Globe2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { NavLink, Link } from 'react-router-dom';
 import Logo from '../../logo/image.png';
 import { useLanguage } from '../contexts/LanguageContext';
-import { languageOptions } from '../i18n/translations';
 import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { language, setLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const { mode } = useThemeMode();
 
   useEffect(() => {
@@ -88,26 +87,6 @@ const Header = () => {
                 )}
               </NavLink>
             ))}
-            <div className={`h-8 w-px ${mode === 'clear' ? 'bg-slate-300/70' : 'bg-slate-700/80'}`} />
-            <div className="relative">
-              <Globe2 size={14} className={`absolute left-2.5 top-1/2 -translate-y-1/2 ${mode === 'clear' ? 'text-slate-500' : 'text-slate-400'}`} />
-              <select
-                value={language}
-                onChange={(e) => setLanguage(e.target.value as typeof language)}
-                className={`text-sm rounded-full pl-8 pr-3 py-2 border transition-colors appearance-none max-w-[215px] ${
-                  mode === 'clear'
-                    ? 'bg-white border-slate-300 text-slate-700'
-                    : 'bg-slate-900/90 border-slate-700 text-gray-200'
-                }`}
-                aria-label={t('header.language')}
-              >
-                {languageOptions.map((option) => (
-                  <option key={option.code} value={option.code}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
             <motion.a
               href="/contact"
               whileHover={{ scale: 1.05 }}
@@ -158,24 +137,6 @@ const Header = () => {
                   {item.label}
                 </NavLink>
               ))}
-              <div className="pt-1">
-                <label className={`block text-xs mb-2 ${mode === 'clear' ? 'text-slate-500' : 'text-gray-400'}`}>{t('header.language')}</label>
-                <select
-                  value={language}
-                  onChange={(e) => setLanguage(e.target.value as typeof language)}
-                  className={`w-full text-base rounded-lg px-3 py-2.5 border ${
-                    mode === 'clear'
-                      ? 'bg-white border-slate-300 text-slate-700'
-                      : 'bg-slate-900 border-slate-700 text-gray-200'
-                  }`}
-                >
-                  {languageOptions.map((option) => (
-                    <option key={option.code} value={option.code}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
               <NavLink
                 to="/contact"
                 className={({ isActive }) =>

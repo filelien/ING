@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 interface PoleCardProps {
   icon: LucideIcon;
@@ -16,6 +17,7 @@ interface PoleCardProps {
 
 const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, href, image }: PoleCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
+  const { mode } = useThemeMode();
 
   return (
     <motion.div
@@ -28,11 +30,27 @@ const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, hre
       onHoverEnd={() => setIsHovered(false)}
       className="relative group"
     >
-      <div className="relative bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 h-full transition-all duration-300 hover:border-emerald-500/50 overflow-hidden">
+      <div
+        className={`relative rounded-2xl p-8 h-full transition-all duration-300 overflow-hidden border ${
+          mode === 'clear'
+            ? 'bg-white border-slate-200 hover:border-emerald-400 shadow-sm'
+            : 'bg-slate-900/50 border-slate-800 hover:border-emerald-500/50'
+        }`}
+      >
         {image && (
           <div className="absolute inset-x-0 top-0 h-32 overflow-hidden">
-            <img src={image} alt={title} className="w-full h-full object-cover opacity-30 group-hover:opacity-45 transition-opacity duration-300" />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/50 to-slate-900" />
+            <img
+              src={image}
+              alt={title}
+              className="w-full h-full object-cover opacity-95 group-hover:opacity-100 transition-opacity duration-300"
+            />
+            <div
+              className={`absolute inset-0 bg-gradient-to-b ${
+                mode === 'clear'
+                  ? 'from-white/10 via-white/35 to-white/10'
+                  : 'from-slate-950/20 via-slate-950/35 to-slate-900/20'
+              }`}
+            />
           </div>
         )}
 
@@ -53,13 +71,15 @@ const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, hre
           <Icon className="text-white" size={32} />
         </motion.div>
 
-        <h3 className="text-xl font-bold text-white mb-4 relative z-10">{title}</h3>
-        <p className="text-gray-400 leading-relaxed relative z-10">{description}</p>
+        <h3 className={`text-xl font-bold mb-4 relative z-10 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>{title}</h3>
+        <p className={`leading-relaxed relative z-10 ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>{description}</p>
 
         <motion.div whileHover={{ x: 4 }} className="relative z-10 mt-6 inline-flex">
           <Link
             to={href}
-            className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition-colors"
+            className={`inline-flex items-center gap-2 text-sm transition-colors ${
+              mode === 'clear' ? 'text-emerald-700 hover:text-emerald-600' : 'text-emerald-300 hover:text-emerald-200'
+            }`}
           >
             Découvrir le pôle
             <span aria-hidden>→</span>

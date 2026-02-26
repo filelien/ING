@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { Target, Eye, Award, Globe, Quote, UserCheck, Shield, Layers, Landmark } from 'lucide-react';
 import { useEffect } from 'react';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const values = [
   {
@@ -90,11 +91,15 @@ const milestones = [
 ];
 
 const About = () => {
+  const { mode } = useThemeMode();
   return (
-    <section id="about" className="py-24 bg-slate-900 relative overflow-hidden">
+    <section
+      id="about"
+      className={`py-24 relative overflow-hidden ${mode === 'clear' ? 'bg-slate-50' : 'bg-slate-900'}`}
+    >
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(52, 211, 153, 0.15) 1px, transparent 0)',
+          backgroundImage: `radial-gradient(circle at 2px 2px, ${mode === 'clear' ? 'rgba(16, 185, 129, 0.18)' : 'rgba(52, 211, 153, 0.15)'} 1px, transparent 0)`,
           backgroundSize: '40px 40px'
         }} />
       </div>
@@ -107,16 +112,16 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Le <span className="text-emerald-400">Groupe</span>
+            <h2 className={`text-4xl md:text-5xl font-bold mb-6 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>
+              Le <span className={mode === 'clear' ? 'text-emerald-600' : 'text-emerald-400'}>Groupe</span>
             </h2>
-            <p className="text-lg text-gray-400 mb-6 leading-relaxed">
-              <strong className="text-white">INOV AFRIK</strong> est un groupe panafricain d'ingénierie qui travaille sur des projets réels : réseaux solaires, modernisation d'infrastructures, plateformes critiques, supervision de chantiers et sécurisation de systèmes.
+            <p className={`text-lg mb-6 leading-relaxed ${mode === 'clear' ? 'text-slate-700' : 'text-gray-400'}`}>
+              <strong className={mode === 'clear' ? 'text-slate-900' : 'text-white'}>INOV AFRIK</strong> est un groupe panafricain d'ingénierie qui travaille sur des projets réels : réseaux solaires, modernisation d'infrastructures, plateformes critiques, supervision de chantiers et sécurisation de systèmes.
             </p>
-            <p className="text-lg text-gray-400 mb-6 leading-relaxed">
+            <p className={`text-lg mb-6 leading-relaxed ${mode === 'clear' ? 'text-slate-700' : 'text-gray-400'}`}>
               Basés au Togo (Afrique de l'Ouest) et appuyés par un réseau présent dans 180+ pays, nous mobilisons cinq pôles d'excellence pour concevoir, exécuter et maintenir des solutions adaptées aux contraintes locales.
             </p>
-            <p className="text-lg text-gray-400 leading-relaxed">
+            <p className={`text-lg leading-relaxed ${mode === 'clear' ? 'text-slate-700' : 'text-gray-400'}`}>
               Identité légale vérifiable (RCCM, NIF, CNSS), certifications techniques (Oracle, AWS, Azure, ISO 27001, CISSP, CKA) et culture d'intégrité guident chacune de nos interventions.
             </p>
           </motion.div>
@@ -144,7 +149,7 @@ const About = () => {
           <h3 className="text-3xl font-bold text-white mb-8 text-center">
             Vision, Mission & <span className="text-emerald-400">Gouvernance</span>
           </h3>
-          <p className="text-center text-gray-400 max-w-3xl mx-auto mb-8">
+          <p className={`text-center max-w-3xl mx-auto mb-8 ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
             Un cap stratégique clair, une mission d'exécution concrète et une gouvernance orientée performance, conformité et durabilité.
           </p>
           <div className="grid md:grid-cols-3 gap-6">
@@ -155,17 +160,25 @@ const About = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.08 * index }}
-                className="bg-slate-950/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden"
+                className={`rounded-xl p-6 transition-all duration-300 overflow-hidden border ${
+                  mode === 'clear'
+                    ? 'bg-white border-slate-200 hover:border-emerald-400 shadow-sm'
+                    : 'bg-slate-950/50 border-slate-800 hover:border-emerald-500/50'
+                }`}
               >
                 <div className="relative h-28 -mx-6 -mt-6 mb-5 overflow-hidden">
-                  <img src={block.image} alt={block.title} className="w-full h-full object-cover opacity-45" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                  <img src={block.image} alt={block.title} className="w-full h-full object-cover opacity-80" />
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t ${
+                      mode === 'clear' ? 'from-white via-white/70 to-transparent' : 'from-slate-950 to-transparent'
+                    }`}
+                  />
                 </div>
                 <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
                   <block.icon className="text-emerald-400" size={22} />
                 </div>
-                <h4 className="text-lg font-bold text-white mb-2">{block.title}</h4>
-                <p className="text-sm text-gray-400 leading-relaxed">{block.content}</p>
+                <h4 className={`text-lg font-bold mb-2 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>{block.title}</h4>
+                <p className={`text-sm leading-relaxed ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>{block.content}</p>
               </motion.div>
             ))}
           </div>
@@ -178,10 +191,10 @@ const About = () => {
           transition={{ duration: 0.8 }}
           className="mb-12"
         >
-          <h3 className="text-3xl font-bold text-white mb-4 text-center">
-            Nos <span className="text-emerald-400">Valeurs</span>
+          <h3 className={`text-3xl font-bold mb-4 text-center ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>
+            Nos <span className={mode === 'clear' ? 'text-emerald-600' : 'text-emerald-400'}>Valeurs</span>
           </h3>
-          <p className="text-center text-gray-400 max-w-2xl mx-auto">
+          <p className={`text-center max-w-2xl mx-auto ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
             Une culture d'entreprise orientée discipline opérationnelle, innovation utile et impact durable à l'échelle panafricaine.
           </p>
         </motion.div>
@@ -195,19 +208,27 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className={`bg-slate-950/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-all duration-300 overflow-hidden ${
+              className={`rounded-xl p-6 text-center transition-all duration-300 overflow-hidden border ${
+                mode === 'clear'
+                  ? 'bg-white border-slate-200 hover:border-emerald-400 shadow-sm'
+                  : 'bg-slate-950/50 border-slate-800 hover:border-emerald-500/50'
+              } ${
                 index === 4 ? 'md:col-span-2 md:max-w-xl md:mx-auto lg:col-start-2 lg:col-end-4' : ''
               }`}
             >
               <div className="relative h-24 -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-xl">
-                <img src={value.image} alt={value.title} className="w-full h-full object-cover opacity-35" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                <img src={value.image} alt={value.title} className="w-full h-full object-cover opacity-80" />
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t ${
+                    mode === 'clear' ? 'from-white via-white/70 to-transparent' : 'from-slate-950 to-transparent'
+                  }`}
+                />
               </div>
               <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <value.icon className="text-emerald-400" size={24} />
               </div>
-              <h4 className="text-lg font-bold text-white mb-2">{value.title}</h4>
-              <p className="text-sm text-gray-400">{value.description}</p>
+              <h4 className={`text-lg font-bold mb-2 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>{value.title}</h4>
+              <p className={`text-sm ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>{value.description}</p>
             </motion.div>
           ))}
         </div>
@@ -218,16 +239,20 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="bg-slate-950/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm"
+            className={`rounded-2xl p-8 border ${
+              mode === 'clear'
+                ? 'bg-white border-slate-200 shadow-sm'
+                : 'bg-slate-950/50 border-slate-800'
+            }`}
           >
             <div className="flex items-center gap-3 mb-4">
               <Quote className="text-emerald-400" size={24} />
-              <h4 className="text-xl font-bold text-white">Message du fondateur</h4>
+              <h4 className={`text-xl font-bold ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>Message du fondateur</h4>
             </div>
-            <p className="text-gray-300 leading-relaxed mb-4">
+            <p className={`${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'} leading-relaxed mb-4`}>
               "INOV AFRIK est né sur les chantiers et dans les salles serveurs, pas dans un slide deck. Notre priorité : livrer des projets fiables, mesurables et adaptés aux réalités africaines, avec une gouvernance claire et des équipes certifiées."
             </p>
-            <div className="flex items-center gap-3 text-sm text-gray-400">
+            <div className={`flex items-center gap-3 text-sm ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
               <UserCheck size={18} className="text-emerald-400" />
               <span>F. K., Fondateur & Directeur Général</span>
             </div>
@@ -238,19 +263,23 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
-            className="bg-slate-950/50 border border-slate-800 rounded-2xl p-8 backdrop-blur-sm"
+            className={`rounded-2xl p-8 border ${
+              mode === 'clear'
+                ? 'bg-white border-slate-200 shadow-sm'
+                : 'bg-slate-950/50 border-slate-800'
+            }`}
           >
             <div className="flex items-center gap-3 mb-4">
               <Layers className="text-emerald-400" size={22} />
-              <h4 className="text-xl font-bold text-white">Timeline du groupe</h4>
+              <h4 className={`text-xl font-bold ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>Timeline du groupe</h4>
             </div>
             <div className="space-y-4">
               {milestones.map((item) => (
                 <div key={item.year} className="flex gap-4">
                   <div className="w-16 text-emerald-400 font-semibold">{item.year}</div>
                   <div>
-                    <div className="text-white font-semibold">{item.title}</div>
-                    <div className="text-gray-400 text-sm">{item.detail}</div>
+                    <div className={`${mode === 'clear' ? 'text-slate-900' : 'text-white'} font-semibold`}>{item.title}</div>
+                    <div className={`${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'} text-sm`}>{item.detail}</div>
                   </div>
                 </div>
               ))}

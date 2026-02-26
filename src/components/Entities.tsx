@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Globe2, Cpu, Zap, Building2, TrendingUp, Cog, ArrowUpRight, Sparkles } from 'lucide-react';
 import InovTechLogo from '../../logo/INOV_TECHNOLOGY_250x250-C4SJNkeH.png';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const entities = [
   {
@@ -57,13 +58,23 @@ const entities = [
 ];
 
 const Entities = () => {
+  const { mode } = useThemeMode();
   return (
-    <section id="entities" className="py-24 bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900" />
+    <section
+      id="entities"
+      className={`py-24 relative overflow-hidden ${mode === 'clear' ? 'bg-slate-50' : 'bg-slate-950'}`}
+    >
       <div
-        className="absolute inset-0 opacity-25"
+        className={`absolute inset-0 ${
+          mode === 'clear'
+            ? 'bg-gradient-to-b from-white via-slate-100 to-slate-200'
+            : 'bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900'
+        }`}
+      />
+      <div
+        className="absolute inset-0 opacity-20"
         style={{
-          backgroundImage: 'radial-gradient(circle at 1px 1px, rgba(52, 211, 153, 0.08) 1px, transparent 0)',
+          backgroundImage: `radial-gradient(circle at 1px 1px, ${mode === 'clear' ? 'rgba(16, 185, 129, 0.14)' : 'rgba(52, 211, 153, 0.08)'} 1px, transparent 0)`,
           backgroundSize: '30px 30px',
         }}
       />
@@ -77,12 +88,18 @@ const Entities = () => {
           className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-12"
         >
           <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-3">Nos Entités</h2>
-            <p className="text-lg text-gray-400 max-w-2xl">
+            <h2 className={`text-4xl md:text-5xl font-bold mb-3 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>Nos Entités</h2>
+            <p className={`text-lg max-w-2xl ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
               Une architecture de groupe claire, des entités spécialisées et des redirections directes vers chaque écosystème métier.
             </p>
           </div>
-          <div className="flex items-center gap-3 text-sm text-emerald-300 bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full">
+          <div
+            className={`flex items-center gap-3 text-sm px-4 py-2 rounded-full border ${
+              mode === 'clear'
+                ? 'text-emerald-700 bg-emerald-50 border-emerald-200'
+                : 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20'
+            }`}
+          >
             <Globe2 size={18} />
             <span>Holding INOV AFRIK · Présence multi-pays</span>
           </div>
@@ -97,11 +114,19 @@ const Entities = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           whileHover={{ y: -4 }}
-          className="relative block rounded-3xl border border-slate-800 overflow-hidden mb-10 bg-slate-900/70 min-h-[300px] sm:min-h-[360px]"
+          className={`relative block rounded-3xl overflow-hidden mb-10 min-h-[300px] sm:min-h-[360px] border ${
+            mode === 'clear' ? 'border-slate-200 bg-white shadow-sm' : 'border-slate-800 bg-slate-900/70'
+          }`}
         >
-          <img src={entities[0].image} alt={entities[0].title} className="absolute inset-0 w-full h-full object-cover opacity-20" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-slate-900/50" />
-          <div className={`absolute inset-0 bg-gradient-to-br ${entities[0].gradient} opacity-40`} />
+          <img src={entities[0].image} alt={entities[0].title} className="absolute inset-0 w-full h-full object-cover opacity-90" />
+          <div
+            className={`absolute inset-0 bg-gradient-to-r ${
+              mode === 'clear'
+                ? 'from-white/35 via-white/45 to-white/20'
+                : 'from-slate-950/75 via-slate-950/65 to-slate-900/50'
+            }`}
+          />
+          <div className={`absolute inset-0 bg-gradient-to-br ${entities[0].gradient} opacity-15`} />
 
           <div className="relative z-10 p-6 sm:p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8 min-h-[300px] sm:min-h-[360px]">
             <div className="flex items-start gap-4 sm:gap-5">
@@ -112,13 +137,13 @@ const Entities = () => {
                 <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-emerald-300 mb-2">
                   <Sparkles size={14} /> Entité phare
                 </div>
-                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{entities[0].title}</h3>
-                <p className="text-base sm:text-lg text-gray-300 mb-2">{entities[0].subtitle}</p>
-                <p className="text-sm sm:text-base text-emerald-200">{entities[0].metric}</p>
+                <h3 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-1 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>{entities[0].title}</h3>
+                <p className={`text-base sm:text-lg mb-2 ${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'}`}>{entities[0].subtitle}</p>
+                <p className={`${mode === 'clear' ? 'text-emerald-700' : 'text-emerald-200'} text-sm sm:text-base`}>{entities[0].metric}</p>
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 text-base sm:text-lg text-emerald-300 font-medium">
+            <div className={`inline-flex items-center gap-2 text-base sm:text-lg font-medium ${mode === 'clear' ? 'text-emerald-700' : 'text-emerald-300'}`}>
               Accéder au site
               <ArrowUpRight size={18} />
             </div>
@@ -137,25 +162,35 @@ const Entities = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.08 * index }}
               whileHover={{ y: -8, scale: 1.01 }}
-              className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-lg p-5 sm:p-8 shadow-lg transition-all duration-300 min-h-[240px] sm:min-h-[270px]"
+              className={`group relative overflow-hidden rounded-2xl p-5 sm:p-8 shadow-lg transition-all duration-300 min-h-[240px] sm:min-h-[270px] border ${
+                mode === 'clear'
+                  ? 'border-slate-200 bg-white'
+                  : 'border-slate-800 bg-slate-900/60'
+              }`}
             >
-              <img src={entity.image} alt={entity.title} className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-300" />
-              <div className={`absolute inset-0 bg-gradient-to-br ${entity.gradient} blur-3xl`} />
-              <div className="absolute inset-0 bg-slate-950/45" />
+              <img
+                src={entity.image}
+                alt={entity.title}
+                className="absolute inset-0 w-full h-full object-cover opacity-85 group-hover:opacity-95 transition-opacity duration-300"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${entity.gradient} opacity-12`} />
+              <div className={`absolute inset-0 ${mode === 'clear' ? 'bg-white/18' : 'bg-slate-950/20'}`} />
 
               <div className="relative z-10 flex items-start gap-4 sm:gap-5 h-full">
                 <motion.div
                   whileHover={{ rotate: 10, scale: 1.08 }}
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center"
                 >
-                  <entity.icon className="text-white" size={22} />
+                  <entity.icon className={mode === 'clear' ? 'text-emerald-700' : 'text-white'} size={22} />
                 </motion.div>
 
                 <div className="flex-1">
-                  <h3 className="text-xl sm:text-2xl font-semibold text-white">{entity.title}</h3>
-                  <p className="text-sm sm:text-base text-gray-300 mt-1">{entity.subtitle}</p>
-                  <p className="text-sm sm:text-base text-emerald-200 mt-3">{entity.metric}</p>
-                  <div className="mt-4 sm:mt-6 inline-flex items-center gap-2 text-sm sm:text-base text-emerald-300 group-hover:gap-3 transition-all duration-300">
+                  <h3 className={`text-xl sm:text-2xl font-semibold ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>{entity.title}</h3>
+                  <p className={`text-sm sm:text-base mt-1 ${mode === 'clear' ? 'text-slate-700' : 'text-gray-300'}`}>{entity.subtitle}</p>
+                  <p className={`text-sm sm:text-base mt-3 ${mode === 'clear' ? 'text-emerald-700' : 'text-emerald-200'}`}>{entity.metric}</p>
+                  <div className={`mt-4 sm:mt-6 inline-flex items-center gap-2 text-sm sm:text-base group-hover:gap-3 transition-all duration-300 ${
+                    mode === 'clear' ? 'text-emerald-700' : 'text-emerald-300'
+                  }`}>
                     Accéder au site
                     <ArrowUpRight size={16} />
                   </div>

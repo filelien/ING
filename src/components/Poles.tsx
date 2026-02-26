@@ -15,6 +15,7 @@ import {
 import PoleCard from './PoleCard';
 import { poles } from '../data/poles';
 import { Link } from 'react-router-dom';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const iconMap = {
   technologies: Code,
@@ -31,11 +32,21 @@ const iconMap = {
 } as const;
 
 const Poles = () => {
+  const { mode } = useThemeMode();
   const spotlightImages = poles.slice(0, 4).map((pole) => ({ title: pole.title, image: pole.heroImage, slug: pole.slug }));
 
   return (
-    <section id="poles" className="py-24 bg-slate-950 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 opacity-50" />
+    <section
+      id="poles"
+      className={`py-24 relative overflow-hidden ${mode === 'clear' ? 'bg-slate-50' : 'bg-slate-950'}`}
+    >
+      <div
+        className={`absolute inset-0 ${
+          mode === 'clear'
+            ? 'bg-gradient-to-b from-white via-slate-100 to-slate-200 opacity-80'
+            : 'bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 opacity-50'
+        }`}
+      />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
@@ -45,10 +56,10 @@ const Poles = () => {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Nos Pôles d'<span className="text-emerald-400">Excellence</span>
+          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${mode === 'clear' ? 'text-slate-900' : 'text-white'}`}>
+            Nos Pôles d'<span className={mode === 'clear' ? 'text-emerald-600' : 'text-emerald-400'}>Excellence</span>
           </h2>
-          <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+          <p className={`text-xl max-w-3xl mx-auto ${mode === 'clear' ? 'text-slate-600' : 'text-gray-400'}`}>
             Des pôles complémentaires pour répondre aux défis technologiques, énergétiques, industriels et territoriaux du développement africain.
           </p>
 
@@ -57,7 +68,11 @@ const Poles = () => {
               <Link
                 key={pole.slug}
                 to={`/poles/${pole.slug}`}
-                className="px-3 py-2 rounded-full border border-slate-700 text-xs md:text-sm text-gray-300 hover:text-emerald-300 hover:border-emerald-500/60 transition-colors"
+                className={`px-3 py-2 rounded-full border text-xs md:text-sm transition-colors ${
+                  mode === 'clear'
+                    ? 'border-slate-300 text-slate-700 hover:text-emerald-600 hover:border-emerald-400'
+                    : 'border-slate-700 text-gray-300 hover:text-emerald-300 hover:border-emerald-500/60'
+                }`}
               >
                 {pole.title}
               </Link>
@@ -69,11 +84,25 @@ const Poles = () => {
               <Link
                 key={item.title}
                 to={`/poles/${item.slug}`}
-                className="relative h-28 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/60 transition-colors block"
+                className={`relative h-28 rounded-xl overflow-hidden border transition-colors block ${
+                  mode === 'clear' ? 'border-slate-300 hover:border-emerald-400' : 'border-slate-800 hover:border-emerald-500/60'
+                }`}
               >
                 <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-                <div className="absolute bottom-2 left-3 right-3 text-left text-xs text-gray-200 line-clamp-2">{item.title}</div>
+                <div
+                  className={`absolute inset-0 bg-gradient-to-t ${
+                    mode === 'clear'
+                      ? 'from-white via-white/60 to-transparent'
+                      : 'from-slate-950 via-slate-950/30 to-transparent'
+                  }`}
+                />
+                <div
+                  className={`absolute bottom-2 left-3 right-3 text-left text-xs line-clamp-2 ${
+                    mode === 'clear' ? 'text-slate-800' : 'text-gray-200'
+                  }`}
+                >
+                  {item.title}
+                </div>
               </Link>
             ))}
           </div>
