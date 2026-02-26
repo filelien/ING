@@ -30,11 +30,20 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-16 flex flex-col items-center text-center gap-12">
         <div className="flex flex-col items-center gap-5">
           <div className="relative">
-            <div className="absolute inset-0 blur-xl bg-emerald-500/20 rounded-full scale-125" aria-hidden />
+            <motion.div
+              aria-hidden
+              animate={{ opacity: [0.55, 0.85, 0.55], scale: [1, 1.08, 1] }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+              className="absolute -inset-8 md:-inset-10 rounded-full bg-emerald-400/30 blur-2xl"
+            />
+            <div
+              aria-hidden
+              className="absolute -inset-4 md:-inset-5 rounded-full bg-cyan-400/20 blur-xl"
+            />
             <img
               src={Logo}
               alt="INOV AFRIK"
-              className="w-24 h-24 rounded-xl shadow-xl ring-2 ring-emerald-500/40 bg-white/5 backdrop-blur"
+              className="relative w-40 h-40 md:w-52 md:h-52 rounded-2xl shadow-2xl ring-2 ring-emerald-400/60 bg-white/10 backdrop-blur"
             />
           </div>
           <h3 className="text-2xl font-bold text-white">

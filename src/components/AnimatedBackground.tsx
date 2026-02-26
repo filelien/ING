@@ -1,7 +1,9 @@
 import { useEffect, useRef } from 'react';
+import { useThemeMode } from '../contexts/ThemeModeContext';
 
 const AnimatedBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { mode } = useThemeMode();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,7 +34,7 @@ const AnimatedBackground = () => {
     }
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.05)';
+      ctx.fillStyle = mode === 'clear' ? 'rgba(248, 250, 252, 0.14)' : 'rgba(2, 6, 23, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       particles.forEach((particle, i) => {
@@ -44,7 +46,7 @@ const AnimatedBackground = () => {
 
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(52, 211, 153, 0.5)';
+        ctx.fillStyle = mode === 'clear' ? 'rgba(16, 185, 129, 0.45)' : 'rgba(52, 211, 153, 0.5)';
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -56,7 +58,10 @@ const AnimatedBackground = () => {
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(52, 211, 153, ${0.2 * (1 - distance / 150)})`;
+            ctx.strokeStyle =
+              mode === 'clear'
+                ? `rgba(5, 150, 105, ${0.18 * (1 - distance / 150)})`
+                : `rgba(52, 211, 153, ${0.2 * (1 - distance / 150)})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -75,13 +80,18 @@ const AnimatedBackground = () => {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [mode]);
 
   return (
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ background: 'linear-gradient(to bottom, #020617, #0f172a)' }}
+      style={{
+        background:
+          mode === 'clear'
+            ? 'linear-gradient(to bottom, #f8fafc, #e2e8f0)'
+            : 'linear-gradient(to bottom, #020617, #0f172a)',
+      }}
     />
   );
 };

@@ -48,6 +48,11 @@ body.mode-clear .text-white {
   color: #0f172a !important;
 }
 
+body.mode-clear .bg-emerald-500.text-white,
+body.mode-clear .bg-emerald-600.text-white {
+  color: #ffffff !important;
+}
+
 body.mode-clear .text-gray-200,
 body.mode-clear .text-gray-300,
 body.mode-clear .text-gray-400,

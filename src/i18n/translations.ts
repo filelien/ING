@@ -3,12 +3,12 @@ export type LanguageCode = 'fr' | 'en' | 'es' | 'pt' | 'de' | 'ar';
 type Dict = Record<string, string>;
 
 export const languageOptions: { code: LanguageCode; label: string }[] = [
-  { code: 'fr', label: 'Français' },
-  { code: 'en', label: 'English' },
-  { code: 'es', label: 'Español' },
-  { code: 'pt', label: 'Português' },
-  { code: 'de', label: 'Deutsch' },
-  { code: 'ar', label: 'العربية' },
+  { code: 'fr', label: '🇫🇷 Français — France' },
+  { code: 'en', label: '🇬🇧 English — United Kingdom' },
+  { code: 'es', label: '🇪🇸 Español — España' },
+  { code: 'pt', label: '🇵🇹 Português — Portugal' },
+  { code: 'de', label: '🇩🇪 Deutsch — Deutschland' },
+  { code: 'ar', label: '🇲🇦 العربية — المغرب' },
 ];
 
 export const translations: Record<LanguageCode, Dict> = {
