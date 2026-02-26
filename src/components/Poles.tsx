@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import PoleCard from './PoleCard';
 import { poles } from '../data/poles';
+import { Link } from 'react-router-dom';
 
 const iconMap = {
   technologies: Code,
@@ -30,6 +31,8 @@ const iconMap = {
 } as const;
 
 const Poles = () => {
+  const spotlightImages = poles.slice(0, 4).map((pole) => ({ title: pole.title, image: pole.heroImage, slug: pole.slug }));
+
   return (
     <section id="poles" className="py-24 bg-slate-950 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-slate-950 to-slate-900 opacity-50" />
@@ -46,8 +49,34 @@ const Poles = () => {
             Nos Pôles d'<span className="text-emerald-400">Excellence</span>
           </h2>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Cinq domaines d'expertise pour répondre aux défis stratégiques du développement africain
+            Des pôles complémentaires pour répondre aux défis technologiques, énergétiques, industriels et territoriaux du développement africain.
           </p>
+
+          <div className="mt-8 flex flex-wrap justify-center gap-2">
+            {poles.map((pole) => (
+              <Link
+                key={pole.slug}
+                to={`/poles/${pole.slug}`}
+                className="px-3 py-2 rounded-full border border-slate-700 text-xs md:text-sm text-gray-300 hover:text-emerald-300 hover:border-emerald-500/60 transition-colors"
+              >
+                {pole.title}
+              </Link>
+            ))}
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-10">
+            {spotlightImages.map((item) => (
+              <Link
+                key={item.title}
+                to={`/poles/${item.slug}`}
+                className="relative h-28 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/60 transition-colors block"
+              >
+                <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
+                <div className="absolute bottom-2 left-3 right-3 text-left text-xs text-gray-200 line-clamp-2">{item.title}</div>
+              </Link>
+            ))}
+          </div>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -63,6 +92,7 @@ const Poles = () => {
                 glowColor="rgba(52,211,153,0.28)"
                 href={`/poles/${pole.slug}`}
                 index={index}
+                image={pole.heroImage}
               />
             );
           })}

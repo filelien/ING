@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Briefcase, Users, Building2 } from 'lucide-react';
 import { useState } from 'react';
 
 const Contact = () => {
@@ -37,6 +37,24 @@ const Contact = () => {
       title: 'Localisation',
       content: 'Lomé, Togo · Afrique de l\'Ouest',
       link: '/contact',
+    },
+  ];
+
+  const institutionalChannels = [
+    {
+      icon: Briefcase,
+      title: 'Service Partenariats',
+      detail: 'Montage de partenariats publics/privés, consortiums et co-traitance.',
+    },
+    {
+      icon: Users,
+      title: 'Recrutement & Talents',
+      detail: 'Profils ingénierie, IT, énergie, HSE et gestion de projets.',
+    },
+    {
+      icon: Building2,
+      title: 'Relations Institutionnelles',
+      detail: 'Coordination avec ministères, agences, bailleurs et organisations.',
     },
   ];
 
@@ -195,6 +213,19 @@ const Contact = () => {
               >
                 Demander un devis
               </motion.button>
+            </div>
+
+            <div className="space-y-4">
+              <h4 className="text-xl font-bold text-white">Contact & Relations Institutionnelles</h4>
+              {institutionalChannels.map((channel) => (
+                <div key={channel.title} className="p-5 bg-slate-950/50 border border-slate-800 rounded-xl">
+                  <div className="flex items-center gap-3 mb-2">
+                    <channel.icon className="text-emerald-400" size={18} />
+                    <span className="text-white font-semibold">{channel.title}</span>
+                  </div>
+                  <p className="text-sm text-gray-400">{channel.detail}</p>
+                </div>
+              ))}
             </div>
           </motion.div>
         </div>

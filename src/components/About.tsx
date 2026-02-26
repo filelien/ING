@@ -1,12 +1,62 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
-import { Target, Eye, Award, Globe, Quote, UserCheck, Shield, Layers } from 'lucide-react';
+import { Target, Eye, Award, Globe, Quote, UserCheck, Shield, Layers, Landmark } from 'lucide-react';
 import { useEffect } from 'react';
 
 const values = [
-  { icon: Target, title: 'Excellence', description: 'Qualité et rigueur dans chaque projet' },
-  { icon: Eye, title: 'Innovation', description: 'Solutions créatives et technologies de pointe' },
-  { icon: Award, title: 'Intégrité', description: 'Transparence et éthique professionnelle' },
-  { icon: Globe, title: 'Impact Durable', description: 'Contribution au développement africain' },
+  {
+    icon: Target,
+    title: 'Excellence',
+    description: 'Qualité et rigueur dans chaque projet',
+    image: 'https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Eye,
+    title: 'Innovation',
+    description: 'Solutions créatives et technologies de pointe',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Shield,
+    title: 'Rigueur technique',
+    description: 'Méthodes, normes et sécurité d\'exécution',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Award,
+    title: 'Intégrité',
+    description: 'Transparence et éthique professionnelle',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Globe,
+    title: 'Impact Durable',
+    description: 'Contribution au développement africain',
+    image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=900&q=80',
+  },
+];
+
+const strategicBlocks = [
+  {
+    icon: Eye,
+    title: 'Vision',
+    content:
+      'Contribuer au développement structurel de l\'Afrique à travers des solutions technologiques, énergétiques et industrielles durables.',
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Target,
+    title: 'Mission',
+    content:
+      'Concevoir, développer et exécuter des projets à forte valeur ajoutée dans des secteurs stratégiques pour les institutions et les entreprises.',
+    image: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=900&q=80',
+  },
+  {
+    icon: Landmark,
+    title: 'Gouvernance',
+    content:
+      'Direction opérationnelle, pilotage par indicateurs, conformité légale publiée et gestion des risques orientée continuité d\'activité.',
+    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80',
+  },
 ];
 
 const stats = [
@@ -89,11 +139,51 @@ const About = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="mb-12 mt-4"
+        >
+          <h3 className="text-3xl font-bold text-white mb-8 text-center">
+            Vision, Mission & <span className="text-emerald-400">Gouvernance</span>
+          </h3>
+          <p className="text-center text-gray-400 max-w-3xl mx-auto mb-8">
+            Un cap stratégique clair, une mission d'exécution concrète et une gouvernance orientée performance, conformité et durabilité.
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {strategicBlocks.map((block, index) => (
+              <motion.div
+                key={block.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.08 * index }}
+                className="bg-slate-950/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 hover:border-emerald-500/50 transition-all duration-300 overflow-hidden"
+              >
+                <div className="relative h-28 -mx-6 -mt-6 mb-5 overflow-hidden">
+                  <img src={block.image} alt={block.title} className="w-full h-full object-cover opacity-45" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+                </div>
+                <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mb-4">
+                  <block.icon className="text-emerald-400" size={22} />
+                </div>
+                <h4 className="text-lg font-bold text-white mb-2">{block.title}</h4>
+                <p className="text-sm text-gray-400 leading-relaxed">{block.content}</p>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
           className="mb-12"
         >
           <h3 className="text-3xl font-bold text-white mb-4 text-center">
             Nos <span className="text-emerald-400">Valeurs</span>
           </h3>
+          <p className="text-center text-gray-400 max-w-2xl mx-auto">
+            Une culture d'entreprise orientée discipline opérationnelle, innovation utile et impact durable à l'échelle panafricaine.
+          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -105,8 +195,14 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               whileHover={{ y: -5 }}
-              className="bg-slate-950/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-all duration-300"
+              className={`bg-slate-950/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6 text-center hover:border-emerald-500/50 transition-all duration-300 overflow-hidden ${
+                index === 4 ? 'md:col-span-2 md:max-w-xl md:mx-auto lg:col-start-2 lg:col-end-4' : ''
+              }`}
             >
+              <div className="relative h-24 -mx-6 -mt-6 mb-5 overflow-hidden rounded-t-xl">
+                <img src={value.image} alt={value.title} className="w-full h-full object-cover opacity-35" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 to-transparent" />
+              </div>
               <div className="w-12 h-12 bg-emerald-500/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <value.icon className="text-emerald-400" size={24} />
               </div>

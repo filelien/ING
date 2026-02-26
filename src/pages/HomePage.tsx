@@ -4,6 +4,7 @@ import Entities from '../components/Entities';
 import Poles from '../components/Poles';
 import Projects from '../components/Projects';
 import Partnerships from '../components/Partnerships';
+import Synergy from '../components/Synergy';
 import News from '../components/News';
 
 const HomePage = () => {
@@ -13,6 +14,7 @@ const HomePage = () => {
       <About />
       <Entities />
       <Poles />
+      <Synergy />
       <Projects />
       <Partnerships />
       <News />

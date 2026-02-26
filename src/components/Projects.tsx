@@ -5,42 +5,60 @@ const projects = [
   {
     category: 'Technologies',
     title: 'Dossier patient unifié – réseau hospitalier (Lomé, 2024)',
-    description: 'Déploiement d\'un ERP santé (IAM, traçabilité, télémédecine) avec hébergement souverain et reprise d\'activité testée.',
+    context: 'Réseau hospitalier multi-sites avec SI fragmenté et incidents de disponibilité.',
+    challenge: 'Assurer interopérabilité, sécurité des données de santé et continuité de service.',
+    solution: 'ERP santé unifié, IAM renforcé, traçabilité et PRA testé avec hébergement souverain.',
+    result: 'Disponibilité portée à 99.7%, reprise en moins de 15 minutes et pilotage centralisé.',
     image: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['Cloud', 'Sécurité', 'e-Santé'],
   },
   {
     category: 'Énergie',
     title: 'Micro-réseau solaire 500 kW – zone industrielle (2023)',
-    description: 'Ingénierie, installation et supervision d\'un micro-réseau hybride avec monitoring 24/7 et réduction de 38% de la facture énergétique.',
+    context: 'Site industriel dépendant au diesel avec coûts énergétiques élevés.',
+    challenge: 'Réduire la facture, sécuriser l\'alimentation et limiter les émissions carbone.',
+    solution: 'Conception et déploiement d\'un micro-réseau hybride avec monitoring 24/7.',
+    result: '-38% sur la facture énergétique et baisse significative des émissions.',
     image: 'https://images.pexels.com/photos/356036/pexels-photo-356036.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['Solaire', 'Hybride', 'Monitoring'],
   },
   {
     category: 'Génie Civil',
     title: 'Centre logistique 5 000 m² – Afrique de l\'Ouest',
-    description: 'Conception, contrôle technique et suivi OPC pour un hub logistique avec normes HSE et circulation poids lourds optimisée.',
+    context: 'Besoin d\'une plateforme logistique pour absorber une croissance régionale rapide.',
+    challenge: 'Livrer dans les délais avec conformité HSE et contraintes de flux poids lourds.',
+    solution: 'Conception technique, suivi OPC, contrôle qualité et pilotage HSE renforcé.',
+    result: 'Infrastructure livrée conforme, circulation optimisée et exploitation sécurisée.',
     image: 'https://images.pexels.com/photos/325185/pexels-photo-325185.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['OPC', 'HSE', 'Infrastructures'],
   },
   {
     category: 'Économie',
     title: 'Étude de faisabilité zone industrielle (2024)',
-    description: 'Analyse financière, supply chain et schéma directeur pour un parc multi-activité avec scénarios CAPEX/OPEX documentés.',
+    context: 'Projet de parc multi-activité nécessitant validation économique et phasage.',
+    challenge: 'Sécuriser la décision d\'investissement avec scénarios réalistes CAPEX/OPEX.',
+    solution: 'Étude de marché, modélisation financière et schéma directeur opérationnel.',
+    result: 'Décision d\'investissement validée avec feuille de route phasée.',
     image: 'https://images.pexels.com/photos/7681091/pexels-photo-7681091.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['Finance', 'Supply Chain', 'Schéma directeur'],
   },
   {
     category: 'Mécanique',
     title: 'Ligne de convoyage agroalimentaire (2025)',
-    description: 'Études, fabrication locale et mise en service d\'une ligne automatisée avec maintenance préventive numérisée.',
+    context: 'Production agroalimentaire limitée par des arrêts récurrents et une manutention manuelle.',
+    challenge: 'Améliorer la cadence et réduire les pannes critiques.',
+    solution: 'Conception/fabrication d\'une ligne automatisée avec maintenance préventive digitalisée.',
+    result: '+22% de débit et division par deux des arrêts non planifiés.',
     image: 'https://images.pexels.com/photos/1267338/pexels-photo-1267338.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['Automatisation', 'Supervision', 'Maintenance'],
   },
   {
     category: 'Cybersécurité',
     title: 'Renforcement sécurité bancaire (2024)',
-    description: 'Audit technique, SOC partagé et durcissement des accès pour une institution financière avec plan de remédiation priorisé.',
+    context: 'Institution financière exposée à des tentatives de fraude et risques d\'accès non maîtrisés.',
+    challenge: 'Réduire l\'exposition sans interrompre les opérations critiques.',
+    solution: 'Audit de sécurité, SOC partagé, durcissement IAM et plan de remédiation priorisé.',
+    result: 'Baisse des incidents critiques et amélioration du niveau de conformité.',
     image: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
     tags: ['SOC', 'IAM', 'Audit'],
   },
@@ -96,9 +114,12 @@ const Projects = () => {
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-gray-400 mb-4 text-sm leading-relaxed">
-                  {project.description}
-                </p>
+                <div className="space-y-2 mb-4 text-sm leading-relaxed">
+                  <p className="text-gray-300"><span className="text-white font-medium">Contexte :</span> {project.context}</p>
+                  <p className="text-gray-300"><span className="text-white font-medium">Problématique :</span> {project.challenge}</p>
+                  <p className="text-gray-300"><span className="text-white font-medium">Solution :</span> {project.solution}</p>
+                  <p className="text-emerald-300"><span className="text-emerald-200 font-medium">Résultat :</span> {project.result}</p>
+                </div>
 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tags.map((tag, tagIndex) => (

@@ -11,9 +11,10 @@ interface PoleCardProps {
   glowColor: string;
   index: number;
   href: string;
+  image?: string;
 }
 
-const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, href }: PoleCardProps) => {
+const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, href, image }: PoleCardProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -28,6 +29,13 @@ const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, hre
       className="relative group"
     >
       <div className="relative bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 h-full transition-all duration-300 hover:border-emerald-500/50 overflow-hidden">
+        {image && (
+          <div className="absolute inset-x-0 top-0 h-32 overflow-hidden">
+            <img src={image} alt={title} className="w-full h-full object-cover opacity-30 group-hover:opacity-45 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/10 via-slate-950/50 to-slate-900" />
+          </div>
+        )}
+
         {isHovered && (
           <motion.div
             className="absolute inset-0 opacity-20 blur-xl"
@@ -38,7 +46,7 @@ const PoleCard = ({ icon: Icon, title, description, color, glowColor, index, hre
         )}
 
         <motion.div
-          className={`w-16 h-16 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center mb-6 relative z-10`}
+          className={`w-16 h-16 rounded-xl bg-gradient-to-br ${color} flex items-center justify-center mb-6 relative z-10 ${image ? 'mt-10' : ''}`}
           whileHover={{ rotate: 360, scale: 1.1 }}
           transition={{ duration: 0.6 }}
         >

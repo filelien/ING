@@ -44,7 +44,7 @@ const Header = () => {
             <img src={Logo} alt="INOV AFRIK" className="w-10 h-10 rounded-full bg-white/5 p-1" />
             <div className="leading-tight">
               <div className="text-xl font-bold">INOV AFRIK</div>
-              <div className="text-xs text-emerald-300 uppercase tracking-widest">Ingénierie & Energie</div>
+              <div className="text-xs text-emerald-300 uppercase tracking-widest">Entreprise & Holding</div>
             </div>
             </Link>
           </motion.div>

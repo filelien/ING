@@ -11,10 +11,12 @@ import InstitutionalPage from './pages/InstitutionalPage';
 import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 import PoleDetailPage from './pages/PoleDetailPage';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <div className="min-h-screen bg-slate-950">
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />

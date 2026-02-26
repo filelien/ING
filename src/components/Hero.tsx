@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedBackground from './AnimatedBackground';
-import Logo from '../../logo/image.png';
 
 const Hero = () => {
   return (
@@ -19,12 +18,12 @@ const Hero = () => {
           className="max-w-5xl mx-auto"
         >
           <motion.h1
-            className="text-5xl md:text-7xl font-bold text-white mb-10"
+            className="text-4xl md:text-6xl font-bold text-white mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Ingénierie réelle pour l'Afrique qui construit
+            L'Ingénierie au service du développement durable africain
           </motion.h1>
 
           <motion.p
@@ -33,7 +32,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
           >
-            Solutions sobres, sécurisées et prêtes à opérer de jour comme de nuit : cloud, énergie, industrie, télécoms et cybersécurité pilotés par des équipes certifiées.
+            INOV AFRIK est un groupe panafricain spécialisé dans l'ingénierie technologique, énergétique et infrastructurelle, avec une approche intégrée orientée performance et innovation.
           </motion.p>
 
           <motion.p
@@ -42,7 +41,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Engagement de résultat, astreinte 24/7 et livrables documentés pour des performances mesurables sur le terrain africain.
+            Structure de groupe solide, expertise technique maîtrisée, capacité d'exécution terrain et ambition continentale au service des institutions et des industriels.
           </motion.p>
 
           <motion.div
@@ -56,7 +55,7 @@ const Hero = () => {
                 to="/projets"
                 className="px-8 py-4 inline-flex bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors duration-300 font-medium"
               >
-                Voir nos références
+                Découvrir nos expertises
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
