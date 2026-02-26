@@ -68,7 +68,7 @@ const Entities = () => {
         }}
       />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -97,28 +97,28 @@ const Entities = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
           whileHover={{ y: -4 }}
-          className="relative block rounded-3xl border border-slate-800 overflow-hidden mb-10 bg-slate-900/70 min-h-[360px]"
+          className="relative block rounded-3xl border border-slate-800 overflow-hidden mb-10 bg-slate-900/70 min-h-[300px] sm:min-h-[360px]"
         >
           <img src={entities[0].image} alt={entities[0].title} className="absolute inset-0 w-full h-full object-cover opacity-20" />
           <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/70 to-slate-900/50" />
           <div className={`absolute inset-0 bg-gradient-to-br ${entities[0].gradient} opacity-40`} />
 
-          <div className="relative z-10 p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-8 min-h-[360px]">
-            <div className="flex items-start gap-5">
-              <div className="relative w-20 h-20 rounded-2xl bg-white/95 p-2 ring-2 ring-emerald-500/40 shadow-xl">
+          <div className="relative z-10 p-6 sm:p-10 md:p-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6 sm:gap-8 min-h-[300px] sm:min-h-[360px]">
+            <div className="flex items-start gap-4 sm:gap-5">
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/95 p-2 ring-2 ring-emerald-500/40 shadow-xl">
                 <img src={entities[0].logo} alt={entities[0].title} className="w-full h-full object-contain" />
               </div>
               <div>
                 <div className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-emerald-300 mb-2">
                   <Sparkles size={14} /> Entité phare
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-1">{entities[0].title}</h3>
-                <p className="text-lg text-gray-300 mb-2">{entities[0].subtitle}</p>
-                <p className="text-base text-emerald-200">{entities[0].metric}</p>
+                <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">{entities[0].title}</h3>
+                <p className="text-base sm:text-lg text-gray-300 mb-2">{entities[0].subtitle}</p>
+                <p className="text-sm sm:text-base text-emerald-200">{entities[0].metric}</p>
               </div>
             </div>
 
-            <div className="inline-flex items-center gap-2 text-lg text-emerald-300 font-medium">
+            <div className="inline-flex items-center gap-2 text-base sm:text-lg text-emerald-300 font-medium">
               Accéder au site
               <ArrowUpRight size={18} />
             </div>
@@ -137,25 +137,25 @@ const Entities = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.08 * index }}
               whileHover={{ y: -8, scale: 1.01 }}
-              className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-lg p-8 shadow-lg transition-all duration-300 min-h-[270px]"
+              className="group relative overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-lg p-5 sm:p-8 shadow-lg transition-all duration-300 min-h-[240px] sm:min-h-[270px]"
             >
               <img src={entity.image} alt={entity.title} className="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-300" />
               <div className={`absolute inset-0 bg-gradient-to-br ${entity.gradient} blur-3xl`} />
               <div className="absolute inset-0 bg-slate-950/45" />
 
-              <div className="relative z-10 flex items-start gap-5 h-full">
+              <div className="relative z-10 flex items-start gap-4 sm:gap-5 h-full">
                 <motion.div
                   whileHover={{ rotate: 10, scale: 1.08 }}
-                  className="w-14 h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 border border-white/10 flex items-center justify-center"
                 >
-                  <entity.icon className="text-white" size={26} />
+                  <entity.icon className="text-white" size={22} />
                 </motion.div>
 
                 <div className="flex-1">
-                  <h3 className="text-2xl font-semibold text-white">{entity.title}</h3>
-                  <p className="text-base text-gray-300 mt-1">{entity.subtitle}</p>
-                  <p className="text-base text-emerald-200 mt-3">{entity.metric}</p>
-                  <div className="mt-6 inline-flex items-center gap-2 text-base text-emerald-300 group-hover:gap-3 transition-all duration-300">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-white">{entity.title}</h3>
+                  <p className="text-sm sm:text-base text-gray-300 mt-1">{entity.subtitle}</p>
+                  <p className="text-sm sm:text-base text-emerald-200 mt-3">{entity.metric}</p>
+                  <div className="mt-4 sm:mt-6 inline-flex items-center gap-2 text-sm sm:text-base text-emerald-300 group-hover:gap-3 transition-all duration-300">
                     Accéder au site
                     <ArrowUpRight size={16} />
                   </div>

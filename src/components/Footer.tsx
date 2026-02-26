@@ -2,9 +2,15 @@ import { motion } from 'framer-motion';
 import { Linkedin, Twitter, Facebook, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo from '../../logo/image.png';
+import { useLanguage } from '../contexts/LanguageContext';
+import { useThemeMode } from '../contexts/ThemeModeContext';
+import { languageOptions } from '../i18n/translations';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { language, t } = useLanguage();
+  const { mode } = useThemeMode();
+  const currentLanguageLabel = languageOptions.find((option) => option.code === language)?.label ?? 'Français';
 
   const footerLinks = {
     Services: ['Conseil', 'Études', 'Réalisation', 'Maintenance'],
@@ -70,7 +76,7 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">Le Groupe</h4>
+            <h4 className="text-white font-semibold mb-4">{t('footer.group')}</h4>
             <ul className="space-y-2">
               {footerLinks.Entreprise.map((link, linkIndex) => (
                 <li key={linkIndex}>
@@ -92,7 +98,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">Services</h4>
+            <h4 className="text-white font-semibold mb-4">{t('footer.services')}</h4>
             <ul className="space-y-2">
               {footerLinks.Services.map((link, linkIndex) => (
                 <li key={linkIndex}>
@@ -114,7 +120,7 @@ const Footer = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="md:mx-auto"
           >
-            <h4 className="text-white font-semibold mb-4">Institutionnel</h4>
+            <h4 className="text-white font-semibold mb-4">{t('footer.institutional')}</h4>
             <ul className="space-y-2">
               {footerLinks.Institutionnel.map((link, linkIndex) => (
                 <li key={linkIndex}>
@@ -133,9 +139,11 @@ const Footer = () => {
         <div className="border-t border-slate-900 pt-8 w-full">
           <div className="flex flex-col items-center gap-3 text-center">
             <p className="text-gray-500 text-sm">
-              © {currentYear} INOV AFRIK. Tous droits réservés.
+              © {currentYear} INOV AFRIK. {t('footer.copy')}
             </p>
-            <p className="text-gray-500 text-xs">Langue : Français · Mode : Sombre · Réseau : 180+ pays</p>
+            <p className="text-gray-500 text-xs">
+              {t('footer.langLine')} : {currentLanguageLabel} · {t('footer.modeLine')} : {mode === 'night' ? t('mode.night') : t('mode.clear')} · {t('footer.networkLine')} : 180+ pays
+            </p>
             <div className="flex flex-wrap justify-center md:items-center gap-3 text-sm text-gray-500">
               <span>RCCM: TG-LFW-01-2023-A10-02858</span>
               <span>NIF: 1001853268</span>

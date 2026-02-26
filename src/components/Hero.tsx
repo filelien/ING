@@ -2,8 +2,11 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import AnimatedBackground from './AnimatedBackground';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const Hero = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <AnimatedBackground />
@@ -23,7 +26,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            L'Ingénierie au service du développement durable africain
+            {t('hero.title')}
           </motion.h1>
 
           <motion.p
@@ -32,7 +35,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
           >
-            INOV AFRIK est un groupe panafricain spécialisé dans l'ingénierie technologique, énergétique et infrastructurelle, avec une approche intégrée orientée performance et innovation.
+            {t('hero.text1')}
           </motion.p>
 
           <motion.p
@@ -41,7 +44,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
           >
-            Structure de groupe solide, expertise technique maîtrisée, capacité d'exécution terrain et ambition continentale au service des institutions et des industriels.
+            {t('hero.text2')}
           </motion.p>
 
           <motion.div
@@ -55,7 +58,7 @@ const Hero = () => {
                 to="/projets"
                 className="px-8 py-4 inline-flex bg-emerald-500 text-white rounded-full hover:bg-emerald-600 transition-colors duration-300 font-medium"
               >
-                Découvrir nos expertises
+                {t('hero.cta1')}
               </Link>
             </motion.div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -63,7 +66,7 @@ const Hero = () => {
                 to="/contact"
                 className="px-8 py-4 inline-flex border-2 border-white text-white rounded-full hover:bg-white hover:text-slate-900 transition-all duration-300 font-medium"
               >
-                Parler à un ingénieur
+                {t('hero.cta2')}
               </Link>
             </motion.div>
           </motion.div>

@@ -66,21 +66,21 @@ const Partnerships = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950 to-slate-900/30" />
       <div className="absolute -top-24 right-0 w-72 h-72 bg-emerald-500/10 blur-3xl rounded-full" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-10"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
             Partenariats & <span className="text-emerald-400">Alliances</span>
           </h2>
           <p className="text-lg text-gray-400 max-w-3xl mx-auto mb-5">
             Un écosystème de partenaires institutionnels, industriels et techniques pour accélérer l’exécution des programmes à fort impact.
           </p>
-          <div className="inline-flex items-center gap-2 text-sm text-emerald-300 border border-emerald-500/30 rounded-full px-4 py-2 bg-emerald-500/10">
+          <div className="inline-flex items-center gap-2 text-xs sm:text-sm text-emerald-300 border border-emerald-500/30 rounded-full px-3 sm:px-4 py-2 bg-emerald-500/10">
             <Network size={16} />
             Cadre de gouvernance partenariale
           </div>
@@ -119,10 +119,10 @@ const Partnerships = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm p-6 md:p-8"
+          className="rounded-2xl border border-slate-800 bg-slate-900/60 backdrop-blur-sm p-5 sm:p-6 md:p-8"
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-5">
-            <h3 className="text-2xl font-semibold text-white">Modèles de collaboration</h3>
+            <h3 className="text-xl sm:text-2xl font-semibold text-white">Modèles de collaboration</h3>
             <Link
               to="/contact"
               className="inline-flex items-center gap-2 text-sm text-emerald-300 hover:text-emerald-200 transition-colors"
@@ -141,7 +141,7 @@ const Partnerships = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.05 * index }}
                 whileHover={{ y: -4 }}
-                className="p-5 rounded-xl border border-slate-800 bg-slate-950/60 text-sm text-gray-300"
+                className="p-4 sm:p-5 rounded-xl border border-slate-800 bg-slate-950/60 text-sm text-gray-300 break-words"
               >
                 <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center mb-3">
                   <model.icon className="text-emerald-300" size={20} />

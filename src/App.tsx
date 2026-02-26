@@ -12,10 +12,14 @@ import ProjectsPage from './pages/ProjectsPage';
 import ContactPage from './pages/ContactPage';
 import PoleDetailPage from './pages/PoleDetailPage';
 import ScrollToTop from './components/ScrollToTop';
+import ThemeModeToggle from './components/ThemeModeToggle';
+import { useThemeMode } from './contexts/ThemeModeContext';
 
 function App() {
+  const { mode } = useThemeMode();
+
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className={`min-h-screen transition-colors duration-300 ${mode === 'clear' ? 'bg-slate-50' : 'bg-slate-950'}`}>
       <ScrollToTop />
       <Header />
       <Routes>
@@ -31,6 +35,7 @@ function App() {
         <Route path="/contact" element={<ContactPage />} />
         <Route path="*" element={<HomePage />} />
       </Routes>
+      <ThemeModeToggle />
       <Footer />
     </div>
   );
